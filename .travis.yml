@@ -1,8 +1,5 @@
 language: python
 
-python:
-  - 3.9
-
 install:
   - pip install -r requirements.txt
   - pip install black
@@ -14,7 +11,7 @@ before_script:
   - python manage.py collectstatic --noinput
 
 script:
-  - black swe1-app --check .
+  - black . --check .
   - flake8 .
   - coverage run --source='.' manage.py test
 
