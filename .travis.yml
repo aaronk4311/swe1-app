@@ -1,23 +1,22 @@
 language: python
 
 python:
-  - 3.9
+  - "3.9"
 
 install:
   - pip install -r requirements.txt
   - pip install black
   - pip install flake8
-  - pip install coverage
+  - pip install coveralls
 
 before_script:
   - python manage.py migrate
   - python manage.py collectstatic --noinput
 
 script:
-  - python manage.py
-  - python -m black . --check
-  - python -m flake8 --max-line-length=92
-  - python -m coverage run --source='.' manage.py test
+  - black --check .
+  - flake8 --count
+  - coverage run --source='.' manage.py test
 
 after_script:
   - coveralls
